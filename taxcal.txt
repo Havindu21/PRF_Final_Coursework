@@ -1,0 +1,526 @@
+import java.util.*;
+class Example{
+	
+	public final static void clearConsole() { 
+		try {
+			final String os = System.getProperty("os.name"); 
+			if (os.contains("Windows")) {
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			} else {
+				System.out.print("\033[H\033[2J"); 
+				System.out.flush();
+			}
+		} catch (final Exception e) {
+		e.printStackTrace();
+		// Handle any exceptions.
+		}
+	}	
+	
+	public static void main(String args[]){
+		System.out.println();
+		System.out.println("                           __  ______  ________ ________ ");
+		System.out.println("                          |  \\/      \\|        |        \\ ");
+		System.out.println("                           \\$|  $$$$$$| $$$$$$$$\\$$$$$$$$");
+		System.out.println("                          |  | $$   \\$| $$__      | $$");
+		System.out.println("                          | $| $$     | $$  \\     | $$");
+		System.out.println("                          | $| $$   __| $$$$$     | $$");
+		System.out.println("                          | $| $$__/  | $$_____   | $$");
+		System.out.println("                          | $$\\$$    $| $$     \\  | $$");
+		System.out.println("                           \\$$ \\$$$$$$ \\$$$$$$$$   \\$$");
+		System.out.println();
+		System.out.println();
+		System.out.println("  _______              __   __     _____               _         _____   _    _   _                  _______    ____   ______           ");
+		System.out.println(" |__   __|     /\\      \\ \\ / /    / ____|      /\\     | |       / ____| | |  | | | |          /\\    |__   __|  / __ \\  | __  \\                  ");
+		System.out.println("    | |       /  \\      \\ V /    | |          /  \\    | |      | |      | |  | | | |         /  \\      | |    | |  | | | |__) |     ") ;
+		System.out.println("    | |      / /\\ \\      > <     | |         / /\\ \\   | |      | |      | |  | | | |        / /\\ \\     | |    | |  | | |  _  /           ");  
+		System.out.println("    | |     / ____ \\    / . \\    | |____    / ____ \\  | |____  | |____  | |__| | | |____   / ____ \\    | |    | |__| | | | \\ \\             ");  
+		System.out.println("    |_|    /_/    \\_\\  /_/ \\_\\    \\_____|  /_/    \\_\\ |______|  \\_____|  \\____/  |______| /_/    \\_\\   |_|     \\____/  |_|  \\_\\         ");
+		System.out.println();
+		System.out.println();
+		System.out.println("====================================================================================================================================================");
+		System.out.println("\n");
+		System.out.println("\t\t{1} Withholding Tax");
+		System.out.println("\t\t{2} Payable Tax");
+		System.out.println("\t\t{3} Income Tax");
+		System.out.println("\t\t{4} Social Security Contribution Levy (SSCL) Tax");
+		System.out.println("\t\t{5} Leasing Payment");
+		System.out.println("\t\t{6} Exit");
+		System.out.println("\n");
+		Scanner input=new Scanner(System.in);
+		System.out.print("Enter an option to continue -> ");
+		int option=input.nextInt();
+		
+		switch(option){
+			case 1: clearConsole();withholding();break;  
+			case 2:clearConsole();payable();break;  
+			case 3:clearConsole();income();break;  
+			case 4:clearConsole();sscl();break;  
+			case 5:clearConsole();leasing();break;  
+			case 6:return;
+		}
+	}
+	
+	public static void withholding(){
+		System.out.println();
+		System.out.println("+----------------------------------------------------+\n                 WITHHOLDING TAX                 \n+----------------------------------------------------+");
+		System.out.println();
+		System.out.println("         [01] Rent Tax");
+		System.out.println("         [02] Bank Interest Tax");
+		System.out.println("         [03] Dividend Tax");
+		System.out.println("         [04] Exit");
+		System.out.println("\n");
+		
+		Scanner input=new Scanner(System.in);
+		System.out.print("Enter an Option to cotinue ->");
+		int option1=input.nextInt();
+		switch(option1){
+			case 1:clearConsole();rent();break;
+			case 2:clearConsole();interest();break;
+			case 3:clearConsole();dividend();break;
+			case 4:return;
+		}
+	}
+	
+	public static void rent(){
+		System.out.println("+----------------------------------------+\n|                RENT TAX                |\n+----------------------------------------+\n");
+		System.out.print(" Enter your rent          : ");
+		Scanner input=new Scanner(System.in);
+		int rent=input.nextInt();
+		if(rent>=0){
+			if(rent>100000){
+				double renttax=(rent-100000)*0.1;
+				System.out.printf("\n You have to pay Rent Tax : "+"%.2f"+"\n\n",renttax);
+				System.out.print("Do you want to calculate another Rent Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					rent();
+				}
+				if(command=='n'){
+					main(null);
+				}
+			}else{
+	 			System.out.println("\n\t\tYou don't have to pay Rent Tax...\n\n");
+				System.out.print("Do you want to calculate another Rent Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					rent();
+				}
+				if(command=='n'){
+					main(null);
+			    }	 			
+			}
+		}else{
+			System.out.println("\n\t\tInvalid input..\n\n");
+			System.out.print("Do you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				rent();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+	
+	public static void interest(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+----------------------------------------+\n|           BANK INTEREST TAX           |\n+----------------------------------------+\n");
+		System.out.print(" Enter your bank interest per year          : ");
+		int interest=input.nextInt();
+		if(interest>=0){
+			double interesttax=interest*0.05;
+			System.out.printf("\n You have to pay Bank Interest Tax per year : "+"%.2f"+"\n\n",interesttax);
+			System.out.print("Do you want to calculate another Bank Interest Tax (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				interest();
+			}
+			if(command=='n'){
+				main(null);
+			}
+		}else{
+			System.out.println("\n\t\tInvalid input..\n\n");
+			System.out.print("Do you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				interest();
+			}
+			if(command=='n'){
+				main(null);
+				
+		    }			
+		}	
+	}
+	
+	public static void dividend(){
+		System.out.println("+----------------------------------------+\n|              DIVIDEND TAX              |\n+----------------------------------------+\n");
+		System.out.print(" Enter your total Dividend per year      : ");
+		Scanner input=new Scanner(System.in);
+		int dividend=input.nextInt();
+		if(dividend>=0){
+			if(dividend>100000){
+				double dividendtax=(dividend-100000)*0.14;
+				System.out.printf("\n You have to pay Dividend  Tax per year  : "+"%.2f"+"\n\n",dividendtax);
+				System.out.print("Do you want to calculate another Dividend Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					dividend();
+				}
+				if(command=='n'){
+					main(null);
+				}
+			}else{
+	 			System.out.println("\n\t\tYou don't have to pay Dividend Tax...\n\n");
+				System.out.print("\n\nDo you want to calculate another Dividend Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					dividend();
+				}
+				if(command=='n'){
+					main(null);
+			    }	 			
+			}
+		}else{
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("Do you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				dividend();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+	
+	public static void payable(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+----------------------------------------+\n|             PAYABLE TAX                |\n+----------------------------------------+\n");
+		System.out.print(" Enter your employee payment per month : ");
+		int payable=input.nextInt();
+		double payabletax=0.0;
+		if(payable<0){
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				payable();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}else if(payable<=100000){
+				System.out.println("\n you don't have to pay Payable Tax...");
+				System.out.print("\n\nDo you want to calculate another Payable Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					payable();
+				}
+				if(command=='n'){
+					main(null);
+				}
+		}else{
+			if(payable<=141667){
+				payabletax=((payable-100000)*0.06);
+			}else if(payable<=183333){
+				payabletax=(((payable-141667)*0.12)+2500);
+			}else if(payable<=225000){
+				payabletax=(((payable-183333)*0.18)+7500);
+			}else if(payable<=266667){
+				payabletax=(((payable-225000)*0.24)+15000);
+			}else if(payable<=308333){
+				payabletax=(((payable-266667)*0.30)+25000);
+			}else{
+				payabletax=(((payable-308333)*0.36)+37500);
+			}
+			double tax=(int)Math.ceil(payabletax);
+			System.out.printf("\n You have to pay Payable Tax per month : "+"%.2f"+"\n",tax);
+			System.out.print("\nDo you want to calculate another Payable Tax (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+				if(command=='y'){
+					payable();
+				}
+				if(command=='n'){
+					main(null);
+				}
+		}
+	}
+	public static void income(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+----------------------------------------+\n|               INCOME TAX               |\n+----------------------------------------+\n");
+		System.out.print(" Enter your total Income per year : ");
+		int income=input.nextInt();
+		double incometax=0.0;
+		if(income<0){
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				income();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}else if(income<=1200000){
+				System.out.println("\n you don't have to pay income Tax...");
+				System.out.print("\n\nDo you want to calculate another income Tax (y/n) : ");
+				char command=input.next().charAt(0);
+				clearConsole();
+				if(command=='y'){
+					income();
+				}
+				if(command=='n'){
+					main(null);
+				}
+		}else{
+			if(income>3700000){
+				incometax=(income-3700000)*0.36;
+				income=3700000;
+			}if(income>3200000){
+				incometax+=(income-3200000)*0.30;
+				income=3200000;
+			}if(income>2700000){
+				incometax+=(income-2700000)*0.24;
+				income=2700000;
+			}if(income>2200000){
+				incometax+=(income-2200000)*0.18;
+				income=2200000;
+			}if(income>1700000){
+				incometax+=(income-1700000)*0.12;
+				income=1700000;
+			}if(income>1200000){
+				incometax+=(income-1200000)*0.06;
+			}
+			System.out.printf("\n You have to pay income Tax per year : "+"%.2f"+"\n",incometax);
+			System.out.print("\n\nDo you want to calculate another income Tax (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+				if(command=='y'){
+					income();
+				}
+				if(command=='n'){
+					main(null);
+				}
+		}
+	}
+				
+	public static void sscl(){
+		System.out.println("+-------------------------------------------------------------+");
+		System.out.println("|       SOCIAL SECURITY CONTRIBUTION LEVY (SSCL) TAX          |");
+		System.out.println("+-------------------------------------------------------------+");
+		System.out.print(" Enter value of Good or Service          : ");
+		Scanner input=new Scanner(System.in);
+		double sscl=input.nextInt();
+		if(sscl>=0){
+			double saletax=sscl*(2.5/100);
+			double vat=(sscl+saletax)*(15.0/100);
+			double sscltax=saletax+vat;
+			System.out.printf("\n You have to pay SSCL Tax   : "+"%.2f"+"\n\n",sscltax);
+			System.out.print("Do you want to calculate another SSCL Tax (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				sscl();
+			}
+			if(command=='n'){
+				main(null);
+			}
+
+		}else{
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				sscl();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+
+	public static void leasing(){
+		System.out.println();
+		System.out.println("+----------------------------------------------------+"); 
+		System.out.println("|                  Leasing Payment                   |");
+		System.out.println("+----------------------------------------------------+"); 
+		System.out.println();
+		System.out.println("         [01] Calculate Monthly Installment");
+		System.out.println("         [02] Search Leasing Category");
+		System.out.println("         [03] Find Leasing Amount");
+		System.out.println("         [04] Exit");
+		System.out.println("\n");
+		
+		Scanner input=new Scanner(System.in);
+		System.out.print("Enter an Option to cotinue ->");
+		int option1=input.nextInt();
+		switch(option1){
+			case 1:clearConsole();installment();break;
+			case 2:clearConsole();category();break;
+			case 3:clearConsole();amount();break;
+			case 4:return;
+		}
+	}
+	
+	public static void installment(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+--------------------------------------------------------+");
+		System.out.println("|              Calculate Monthly Installment             |");
+		System.out.println("+--------------------------------------------------------+");
+		System.out.print(" Enter lease amount         : ");
+		double amount=input.nextDouble();
+		System.out.print("\n Enter annual interest rate : ");
+		double rate=input.nextDouble();
+		double years=0;
+		do{
+			System.out.print("\n Enter number of years      : ");
+			years=input.nextDouble();
+			if(years>5){
+				System.out.println("\n\t\tInvalid number of years...Enter the correct value again...");
+			}
+		}while(years>5);
+			
+		if(amount<0||rate<0){
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				installment();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}else{
+			double A=amount;
+			double i=rate/1200.0;
+			double n=12.0*years;
+			double base=1.0+i;
+			double exponent=n;
+			double a=Math.pow(base, exponent);
+			double installment=(A*i)/(1.0-(1.0/a));
+			System.out.printf("\n Your monthly installment    : "+"%.2f\n",installment);
+			System.out.print("\n\nDo you want to calculate another monthly installment (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				installment();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+	
+	
+	public static void category(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+--------------------------------------------------------+");
+		System.out.println("|                Search Leasing Category                 |");
+		System.out.println("+--------------------------------------------------------+");
+		System.out.print(" Enter lease amount         : ");
+		double amount=input.nextDouble();
+		System.out.print("\n Enter annual interest rate : ");
+		double rate=input.nextDouble();
+	
+		if(amount<0||rate<0){
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				category();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}else{
+			for(int y=3;y<=5;y++){
+				double A=amount;
+				double i=rate/1200.0;
+				double n=12.0*y;
+				double base=1.0+i;
+				double exponent=n;
+				double a=Math.pow(base, exponent);
+				double installment=(A*i)/(1.0-(1.0/a));
+				System.out.printf("\n Your monthly installment for "+y+" year leasing plan - "+"%.2f\n",installment);
+			}
+			System.out.print("\nDo you want to calculate another Leasing Category (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				category();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+	
+	public static void amount(){
+		Scanner input=new Scanner(System.in);
+		System.out.println("+--------------------------------------------------------+");
+		System.out.println("|                 Final Leasing Amount                   |");
+		System.out.println("+--------------------------------------------------------+");
+		System.out.print(" Enter the monthly lease payment amount you can afford   : ");
+		double installment=input.nextDouble();
+		if(installment<0){
+			System.out.println("\n\t\tInvalid input..");
+			System.out.print("\n\nDo you want to enter the correct value again (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				amount();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}else{
+			double years=0;
+			do{
+				System.out.print("\n Enter number of years      : ");
+				years=input.nextDouble();
+				if(years>5){
+					System.out.println("\n\tInvalid number of years...Enter the correct value again...");
+				}
+			}while(years>5);
+			double rate=0;
+				do{
+				System.out.print("\n Enter annual interest rate : ");
+				rate=input.nextDouble();
+				if(rate<0){
+					System.out.println("\n\tInvalid rate...Enter the correct value again...");
+				}
+			}while(rate<0);			
+				double i=rate/1200.0;
+				double n=12.0*years;
+				double base=1.0+i;
+				double exponent=n;
+				double a=Math.pow(base, exponent);
+				double A=(installment*(1.0-(1.0/a)))/i;
+				System.out.printf("\n You can get Lease amount        : %.2f\n",A);
+			System.out.print("\n\nDo you want to calculate another Leasing Category (y/n) : ");
+			char command=input.next().charAt(0);
+			clearConsole();
+			if(command=='y'){
+				amount();
+			}
+			if(command=='n'){
+				main(null);
+		    }
+		}
+	}
+}
